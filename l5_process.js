@@ -3,15 +3,19 @@ function log(msg){
 		msg = JSON.stringify(msg);
 	}
 
-	process.stdout.write(message+ '\n');
+	process.stdout.write(msg+ '\n');
 }
 
 process.on('p::init',function(){
 	log('p module init method');
 })
 
+process.on('p::begin',function(){
+	log('p module begin method');
+})
+
 process.on('exit',function(){
-	log(process.uptime());
+	log("uptime "+process.uptime());
 	log('exiting...');
 })
 
@@ -19,16 +23,16 @@ process.on('uncaughtException',function(err){
 	log('Error: ' + err.message+'\n');
 })
 
-log(process.cwd());
+log("cwd "+process.cwd());
 process.chdir('..');
-log(process.cwd());
-log(process.execPath);
-log(process.version);
-log(process.pid);
-log(process.arch);
-log(process.platform);
+log("cwd "+process.cwd());
+log("execpath "+process.execPath);
+log("version "+process.version);
+log("pid "+ process.pid);
+log("arch " +process.arch);
+log("platform "+process.platform);
 log(process.memoryUsage());
-log(process.env.HOME);
+log("envhome "+process.env.HOME);
 
 
 var pow = require('./power');
